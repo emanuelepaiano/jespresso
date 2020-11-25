@@ -189,10 +189,10 @@ password: password
           <p>For the standard setup just
             edit the
             <a
-              href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+              href="https://github.com/emanuelepaiano/jespresso-lite/blob/main/src/main/resources/application.properties">application.properties</a>
             file,
             while for setup via docker, you need to edit the <a
-              href="https://github.com/emanuelepaiano/jespresso-lite/tree/develop/docker-compose/env">env files</a>
+              href="https://github.com/emanuelepaiano/jespresso-lite/tree/main/docker-compose/env">env files</a>
             before run docker-compose.</p>
           <h5>Setting Unifi Controller parameters</h5>
           <p>Unifi controller starts on TCP 8443 port by default. If you installed controller on jespresso's same host,
@@ -203,7 +203,7 @@ password: password
             <li>
               <p>
                 Into <a
-                href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+                href="https://github.com/emanuelepaiano/jespresso-lite/blob/main/src/main/resources/application.properties">application.properties</a>
                  you should edit variables directly or setting environment vars (i.e. <i>CONTROLLER_URL</i>)
               </p> <code>
               <pre>
@@ -221,7 +221,7 @@ unifiApi.controller.sitename=${CONTROLLER_SITENAME:default}
             <li>
               <p>
                 Into <a
-                href="https://github.com/emanuelepaiano/jespresso-lite/tree/develop/docker-compose/env">docker environment files</a>
+                href="https://github.com/emanuelepaiano/jespresso-lite/tree/main/docker-compose/env">docker environment files</a>
                  you should edit environment vars
               </p> <code>
               <pre>
@@ -239,7 +239,7 @@ CONTROLLER_SITENAME=default
             <li>
               <p>
                 Into <a
-                href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+                href="https://github.com/emanuelepaiano/jespresso-lite/blob/main/src/main/resources/application.properties">application.properties</a>
                  you should edit variables directly or setting environment vars (i.e. <i>CONTROLLER_URL</i>)
               </p> <code>
               <pre>
@@ -267,7 +267,7 @@ unifiApi.controller.session.quota=${QUOTA:4096}
             <li>
               <p>
                 Into <a
-                href="https://github.com/emanuelepaiano/jespresso-lite/tree/develop/docker-compose/env">docker environment files</a>
+                href="https://github.com/emanuelepaiano/jespresso-lite/tree/main/docker-compose/env">docker environment files</a>
                  you should edit environment vars
               </p> <code>
               <pre>
@@ -286,7 +286,7 @@ QUOTA=4096
             <li>
               <p>
                 Into <a
-                href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+                href="https://github.com/emanuelepaiano/jespresso-lite/blob/main/src/main/resources/application.properties">application.properties</a>
                  you should edit variables directly or setting environment vars (i.e. <i>DATASOURCE_USER</i>)
               </p> <code>
               <pre>
@@ -306,7 +306,7 @@ spring.jpa.hibernate.ddl-auto=${DATASOURCE_DDL_AUTO:update}
             <li>
               <p>
                 Into <a
-                href="https://github.com/emanuelepaiano/jespresso-lite/tree/develop/docker-compose/env">docker environment files</a>
+                href="https://github.com/emanuelepaiano/jespresso-lite/tree/main/docker-compose/env">docker environment files</a>
                  you should edit environment vars
               </p> <code>
               <pre>
@@ -326,7 +326,7 @@ DATASOURCE_SCHEMA=classpath:/scripts/postgresql/schema.sql
           <h5>Setting security parameters</h5>
           <p>
             Into <a
-            href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+            href="https://github.com/emanuelepaiano/jespresso-lite/blob/main/src/main/resources/application.properties">application.properties</a>
              you should replace <i>JWT_SECRET</i> and <i>JWT_EXPIRATION</i> default values with your secret values:
           </p> <code>
           <pre>
@@ -340,7 +340,7 @@ jwt.expiration: ${JWT_EXPIRATION:7200}
           <h5>Setting advanced parameters (only for developers!)</h5>
               <p>
                 Into <a
-                href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+                href="https://github.com/emanuelepaiano/jespresso-lite/blob/main/src/main/resources/application.properties">application.properties</a>
                  you can edit variables directly or setting environment vars
               </p> <code>
               <pre>

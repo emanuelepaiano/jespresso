@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>JEspresso - Opensource Captive Portal</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+  <link
+    href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+    rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="css/clean-blog.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="https://emanuelepaiano.github.io">Emanuele Paiano</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="download.html">Download</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="docs.html">Documentation</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="screenshots.html">Screenshots</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="demo.html">Demo</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#support-us">Donate</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Header -->
+  <header class="masthead" style="background-image: url('img/home-bg.jpg')">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>jEspresso</h1>
+            <span class="subheading">Free Captive Portal for Ubiquiti Unifi networks</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-10 col-md-10 mx-auto">
+        <article class="markdown-body entry-content p-5" itemprop="text">
+          <h1>Documentation</h1>
+          <p>JEspresso works with <a href="https://unifi-network.ui.com/wi-fi">Ubiquiti Unifi</a> controller versions 4.X and early 5.X (<b>it doesn't support
+              Dream Machine and last APIs yet</b>). You can install it on small systems like <a href="https://www.raspberrypi.org/">Raspberry Pi</a> (I suggest Pi 4+ with external database, so you can reduce sd write damage), or any <a href="https://www.docker.com/">Docker</a> supported host
+              (Server or NAS).</p>
+          <hr>
+          <h3>Setup</h3>
+          <ul>
+            <li><a href="#run-standalone">Run as standalone application (fastest)</a></li>
+            <li><a href="#building-jar-from-sources">Building runnable JAR from sources</a></li>
+            <li><a href="#building-docker">Building a docker container</a></li>
+            <li><a href="#configuration">Configuration</a></li>
+            <li><a href="#custom-landing">Building custom landing page</a></li>
+            <li><a href="#license">License</a></li>
+          </ul>
+          <hr>
+          <a name="run-standalone"></a>
+          <h3>Run as standalone application (fastest)</h3>
+          <p>You can download a ready-runnable application from <a href="https://github.com/emanuelepaiano/jespresso-lite/releases/tag/0.8.1">here</a> and run application by <i>jespresso.sh</i> script or
+          manually typing</p>
+          <code><pre>
+# java -jar ./jespresso.jar
+          </pre></code> 
+           <p>For configuration, you need to application.properties files, as described in <a href="#configuration">configuration</a> paragraph.</p>
+          <a name="building-jar-from-sources"></a>
+          <hr>
+          <h3>Building runnable JAR from sources</h3>
+          <p>1) You can start installing <a href="https://maven.apache.org/">Maven</a>, a <a
+              href="https://gitforwindows.org/">Git</a> client and OpenJdk (I used <a
+              href="https://adoptopenjdk.net/">AdoptOpenJdk</a>)
+          <p>2) clone JEspresso repository on your local hard drive using git:</p>
+          <code>
+            <pre>
+# git clone https://github.com/emanuelepaiano/jespresso-lite.git
+            </pre>
+          </code>
+          <p>3) move to sources directory and run mvnw for binary building:</p>
+          <code>
+            <pre>
+# cd jEspresso-lite
+# ./mvnw clean package -DskipTests
+          </pre>
+          </code>
+          <p>all dependencies will be downloaded (it takes a while), and you should find jar file into <i>target/</i>
+            directory, all dependencies
+            will be copied into <i>target/libs</i> directory.
+          </p>
+          <a name="building-docker"></a>
+          <hr>
+          <h3>Building a docker container</h3>
+          <p>You can run JEspresso using a <a href="https://www.docker.com/">Docker</a> container on each docker-enabled
+            devices (i.e. NAS or Server).</p>
+          <p>Inside source directory, there is docker-compose subdirectory: this constains several yaml database profile
+            (mysql, postgres and in-memory H2).</p>
+          <p>1) Install docker and docker-compose on your host and compile JEspresso from sources with previous
+            described steps.</p>
+          <p>2) Move into docker compose directory</p>
+          <code>
+            <pre> 
+# cd jEspresso-lite/docker-compose
+            </pre>
+          </code>
+          <p>3) Edit env files into <i>env/</i> directory, setting parameters like Unifi controller credentials. </p>
+          <p>4) Run (as poweruser) docker-compose with 'up' parameter and yaml file:</p>
+          <code>
+            <pre>
+# docker-compose -f jespresso-be-DATABASE_PLATFORM.yml up
+            </pre>
+          </code>
+          <p>replacing DATABASE_PLATFORM with your favourite platform database (i.e. for MYSQL use
+            <i>jespresso-be-mysql.yml</i> file).</p>
+          <b>NB: omitting -f parameter, docker-compose will uses default file <i>jespresso-be-h2-inmemory.yml</i> .</b>
+          <p>5) After running you should see messages like </p>
+          <code>
+            <pre>
+.................. omitted verbose logs ...............................
+
+Tomcat started on port(s): 8080 (http) with context path ''
+Started JEspressoApplication in 16.364 seconds (JVM running for 17.251)
+            </pre>
+          </code>
+          <p>without errors, this means your Captive Portal is running and ready.</p>
+          <hr>
+           <a name="configuration"></a>
+          <h3>Configuration</h3>
+          <p>The configuration depends on the type of setup chosen in the previous steps. </p>
+          <p>If you have installed Unifi controller and jEspresso on same host, and you don't want to store data permanently, you can run application
+            with default options (anyway I suggest to change <a href="#config-security">security parameters</a>). With default options, JEspresso uses
+            embedded <a href="http://www.h2database.com/html/features.html#in_memory_databases">H2 in-memory database</a>, so if you reboot the application, you will lose
+            the data.</p>
+
+            <p>After <a href="https://help.ui.com/hc/en-us/articles/115000166827-UniFi-Guest-Network-Guest-Portal-and-Hotspot-System#h_7574a932-4659-4161-ba49-d6933f2a3811">Guest Portal Unifi setup</a>, 
+              you can login into admin panel using these credentials:
+              <code>
+                <pre>
+url: http://localhost:8080/admin/
+user: administrator@localhost
+password: password
+                </pre>
+              </code>
+            </p>
+
+            <p>If you want to use different database (i.e. <i>MySql</i> or <i>PostgreSql</i>) you should have a custom configuration.</p>
+          <h4>Custom configuration (advanced)</h4>
+          <p>For the standard setup just
+            edit the
+            <a
+              href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+            file,
+            while for setup via docker, you need to edit the <a
+              href="https://github.com/emanuelepaiano/jespresso-lite/tree/develop/docker-compose/env">env files</a>
+            before run docker-compose.</p>
+          <h5>Setting Unifi Controller parameters</h5>
+          <p>Unifi controller starts on TCP 8443 port by default. If you installed controller on jespresso's same host,
+            you need only to edit user, password
+            and sitename.
+          </p>
+          <ul>
+            <li>
+              <p>
+                Into <a
+                href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+                 you should edit variables directly or setting environment vars (i.e. <i>CONTROLLER_URL</i>)
+              </p> <code>
+              <pre>
+# UNIFI CONTROLLER SETTINGS
+unifiApi.controller.url=${CONTROLLER_URL:https://localhost:8443/}
+unifiApi.controller.username=${CONTROLLER_USER:admin}
+unifiApi.controller.password=${CONTROLLER_PASSWORD:password}
+unifiApi.controller.sitename=${CONTROLLER_SITENAME:default}
+              </pre>
+            </code>
+            <p>if the environment variables, those to the left of the ':' character, are not set, they will assume the values to the right of that character
+              (i.e. <i>admin</i> for <i>CONTROLLER_USER</i>).
+            </p>
+            </li>
+            <li>
+              <p>
+                Into <a
+                href="https://github.com/emanuelepaiano/jespresso-lite/tree/develop/docker-compose/env">docker environment files</a>
+                 you should edit environment vars
+              </p> <code>
+              <pre>
+CONTROLLER_URL=https://localhost:8443/
+CONTROLLER_USER=admin
+CONTROLLER_PASSWORD=password
+CONTROLLER_SITENAME=default
+              </pre>
+            </code>
+            </li>
+          </ul>
+          <h5>Setting Wifi guests sessions parameters</h5>
+          <p>Editing these parameters, you can reduce connection time and/or blocking navigation:</p>
+          <ul>
+            <li>
+              <p>
+                Into <a
+                href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+                 you should edit variables directly or setting environment vars (i.e. <i>CONTROLLER_URL</i>)
+              </p> <code>
+              <pre>
+# session duration (in minutes)
+unifiApi.controller.session.duration=${SESSION_DURATION:90}
+
+# hide duration minutes to user (extra time for emergency). I.e. duration is 90 and hiddenMinutes is 30, 
+# users see 90 - 30 = 60 minutes as remaing times
+unifiApi.controller.session.hiddenMinutes=${SESSION_HIDDEN_MINUTES:0}
+
+# session blocked after expire (i.e. blockMinutes=300 means "a guest cannot connect for 300/60=5 hours")
+unifiApi.controller.session.blockMinutes=${SESSION_BLOCK_MINUTES:300}
+
+# max download speed (in Kbps)
+unifiApi.controller.session.downloadSpeed=${DOWNLOAD_SPEED:2048}
+
+# max upload speed (in Kbps)
+unifiApi.controller.session.uploadSpeed=${UPLOAD_SPEED:640}
+
+# max quota (in Mbytes)
+unifiApi.controller.session.quota=${QUOTA:4096}
+              </pre>
+            </code>
+            </li>
+            <li>
+              <p>
+                Into <a
+                href="https://github.com/emanuelepaiano/jespresso-lite/tree/develop/docker-compose/env">docker environment files</a>
+                 you should edit environment vars
+              </p> <code>
+              <pre>
+SESSION_DURATION=60
+SESSION_HIDDEN_MINUTES=0
+SESSION_BLOCK_MINUTES=300
+DOWNLOAD_SPEED=2048
+UPLOAD_SPEED=640
+QUOTA=4096
+              </pre>
+            </code>
+            </li>
+          </ul>
+          <h5>Setting database parameters</h5>
+          <ul>
+            <li>
+              <p>
+                Into <a
+                href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+                 you should edit variables directly or setting environment vars (i.e. <i>DATASOURCE_USER</i>)
+              </p> <code>
+              <pre>
+# -----------------
+# PostgreSQL setup
+# -----------------
+spring.datasource.url=${DATASOURCE_URL:jdbc:postgresql://localhost:5432/jespresso}
+spring.datasource.username=${DATASOURCE_USER:postgres}
+spring.datasource.password=${DATASOURCE_PASSWORD:password}
+spring.datasource.driverClassName=${DATASOURCE_DRIVER_CLASSNAME:org.postgresql.Driver}
+spring.jpa.database-platform=${DATASOURCE_HIBERNATE_DIALECT:org.hibernate.dialect.PostgreSQLDialect}
+#spring.datasource.schema=classpath:/scripts/postgresql/schema.sql
+spring.jpa.hibernate.ddl-auto=${DATASOURCE_DDL_AUTO:update}
+              </pre>
+            </code>
+            </li>
+            <li>
+              <p>
+                Into <a
+                href="https://github.com/emanuelepaiano/jespresso-lite/tree/develop/docker-compose/env">docker environment files</a>
+                 you should edit environment vars
+              </p> <code>
+              <pre>
+DATASOURCE_URL=jdbc:postgresql://localhost:5432/jespresso
+DATASOURCE_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+DATASOURCE_USER=postgres
+DATASOURCE_PASSWORD=password
+DATASOURCE_DRIVER_CLASSNAME=org.postgresql.Driver
+DATASOURCE_DDL_AUTO=none
+DATASOURCE_SCHEMA=classpath:/scripts/postgresql/schema.sql
+#DATASOURCE_DATA=classpath:/scripts/postgresql/data.sql
+              </pre>
+            </code>
+            </li>
+          </ul>
+          <a name="config-security"></a>
+          <h5>Setting security parameters</h5>
+          <p>
+            Into <a
+            href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+             you should replace <i>JWT_SECRET</i> and <i>JWT_EXPIRATION</i> default values with your secret values:
+          </p> <code>
+          <pre>
+# -- JWT and Security Settings --
+jwt.header: ${JWT_HEADER:X-Auth} 
+jwt.secret: ${JWT_SECRET:mySecret}
+jwt.expiration: ${JWT_EXPIRATION:7200}
+          </pre>
+        </code>
+        <p>Don't forget to change default login passwords from Admin Frontend. </p>
+          <h5>Setting advanced parameters (only for developers!)</h5>
+              <p>
+                Into <a
+                href="https://github.com/emanuelepaiano/jespresso-lite/blob/develop/src/main/resources/application.properties">application.properties</a>
+                 you can edit variables directly or setting environment vars
+              </p> <code>
+              <pre>
+# simulate Unifi Controller (useful for developers), set it to false in production 
+unifiApi.controller.mock=${UNIFI_MOCK:false}
+              </pre>
+            </code>
+            <p>Setting <i>UNIFI_MOCK</i> to <i>true</i> you will enable Unifi Controller simulation so, if you are running jespresso on localhost and Captive's 
+              sitename is 'default', you can test portal opening your browser to 
+            <code>
+              <pre>
+http://localhost/guest/s/default/?ap=accesspoint_address&id=mac_address
+              </pre>
+            </code>
+            without having a real Unifi Access point.
+            </p>
+          <hr>
+          <a name="custom-landing"></a>
+          <h3>Building custom landing page</h3>
+          <p>When a client connects to Access Point, it will be redirected automatically to path</p>
+          <code>
+            <pre>
+              /guest/s/default/?ap=ACCESS_POINT_MAC&id=CLIENT_MAC 
+            </pre>
+          </code>
+            on your jEspresso. Your webpage should get query params:
+            <ul>
+              <li><b>ap</b>: current access point's mac address</li>
+              <li><b>id</b>: current guest client's mac address</li>
+            </ul>
+            So you need only to do a POST REST request to <i>/api/authorize-guest</i>, sending a body like            
+          <code>
+            <pre>
+{
+  "acceptTou": "true",
+  "accessPointMacAddress": "FF:FF:FF:FF:FF:FF",
+  "browser": "Firefox",
+  "email": "john@doe.com",
+  "ipAddress": "10.0.0.253",
+  "macAddress": "FF:FF:FF:FF:FF:F3",
+  "operatingSystem": "Linux"
+}
+            </pre>
+          </code>
+          <p> Not all fields are mandatory, you need only
+          <ul>
+            <li><b>acceptTou</b>: it must be <i>true</i>, Tou is Terms Of Use</li>
+            <li><b>accessPointMacAddress</b>: it must be equal to <i>ACCESS_POINT_MAC</i> value</li>
+            <li><b>macAddress</b>: it must be equal to <i>CLIENT_MAC</i> value</li>
+          </ul>
+          Other values will be detected by backend automatically. If all fields are good, you will receive a REST response 200 with body
+        </p>
+        <code><pre>
+{
+  "response": 200,
+  "description": "200 OK",
+  "payload": {
+    "macAddress": "FF:FF:FF:FF:FF:F3",
+    "minutesLeft": 59,
+    "secondsLeft": 59,
+    "expireOn": "2020-09-02 17:16:46",
+    "lastLogin": "2020-09-02 16:16:46",
+    "valid": true
+  }
+}
+        </pre></code>
+        <p>otherwise you will receive a 400 REST response. If <b>valid</b> parameter equal to true, this means your client is connected for 59 minutes 
+          and 59 seconds, otherwise client session is expired.</p> 
+          <p>Using <a href="https://angular.io/">Angular</a>/<a href="https://it.reactjs.org/">React</a> or <a href="https://jquery.com/">JQuery</a>, 
+            you can write your own webpage, and save them into <i>src/main/resources/static/landing</i> folder and <a href="#building-jar-from-sources">recompile the application</a>.</p>
+         
+          <a name="license"></a>
+          <hr>
+          <h3>License</h3>
+          <p>This basic version is released under <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache2
+              License</a>. Custom/commercials version will be released with different licenses.</p>
+          <hr>
+          <a name="support-us"></a>
+          <h3>Donate</h3>
+          <p>If you like this project, consider a little donation, so I can buy new hardware for testing and
+            development. At least you can offer me a coffee.. :)</p>
+          <p><a href="https://www.paypal.me/emanuelepaiano" rel="nofollow"><img
+                src="https://camo.githubusercontent.com/f896f7d176663a1559376bb56aac4bdbbbe85ed1/68747470733a2f2f7777772e70617970616c6f626a656374732e636f6d2f656e5f55532f692f62746e2f62746e5f646f6e61746543435f4c472e676966"
+                alt="paypal" data-canonical-src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif"
+                style="max-width:100%;"></a></p>
+          <hr>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <ul class="list-inline text-center">
+            <li class="list-inline-item">
+              <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+              </a>
+            </li>
+          </ul>
+          <p class="copyright text-muted">Copyright &copy; jEspresso 2020</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="js/clean-blog.min.js"></script>
+
+</body>
+
+</html>

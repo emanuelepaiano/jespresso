@@ -1,0 +1,25 @@
+# Site settings
+title: JEspresso
+header-img: img/4.png
+email: 
+copyright_name: Emanuele Paiano
+description: "JEspresso website"
+baseurl: "https://emanuelepaiano.github.io/jespresso"
+url: "https://emanuelepaiano.github.io/jespresso"
+twitter_username: emanuele_paiano
+github_username:  emanuelepaiano
+facebook_username:  
+
+
+# Google Analytics
+# To enable google analytics, uncomment below line with a valid Google Tracking ID
+google_tracking_id: UA-93922602-1
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: pretty
+paginate: 5
+exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
+
+gems: [jekyll-paginate, jekyll-feed]
